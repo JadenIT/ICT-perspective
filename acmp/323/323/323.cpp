@@ -1,3 +1,7 @@
+﻿/*
+	Correct
+*/
+
 #include <iostream>
 #include <math.h>
 
@@ -5,7 +9,7 @@ using namespace std;
 
 int main() {
 
-	int N, M, s1,s2;
+	int N, M, s1, s2;
 
 	cin >> M;
 

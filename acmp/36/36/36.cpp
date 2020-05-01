@@ -1,4 +1,8 @@
-﻿#include <iostream>
+﻿/*
+	Correct
+*/
+
+#include <iostream>
 
 using namespace std;
 
