@@ -1,66 +1,38 @@
-﻿#include <iostream>
-#include <vector>
+﻿/*
+	Correct
+*/
+
+#include <iostream>
 
 using namespace std;
 
-int* getSieve(int* sieve, int N) {
-	int p = 2;
-	while (p * p <= N) {
-		for (int i = 2; i <= N; i++) {
-			if (sieve[i] % p == 0 && sieve[i] >= 2 * p) {
-				sieve[i] = 0;
-			}
-		}
-		for (int i = 2; i <= N; i++) {
-			if (sieve[i] > p) {
-				p = sieve[i];
-				break;
-			}
-		}
+bool isSimple(int num) {
+	for (int i = 2; i <= num / 2; i++) {
+		if (num % i == 0) return false;
 	}
-
-	return sieve;
+	return true;
 }
 
 int main()
 {
-	int k;
+	int k, c = 0, c_2 = 0, i = 2;
+
 	cin >> k;
-	int N = 200 * 200;
 
-	int* sieve = new int[N];
-
-	for (int i = 2; i <= N; i++) {
-		sieve[i] = i;
-	}
-
-	sieve = getSieve(sieve, N);
-
-	vector<int> newSieve;
-	for (int i = 2; i <= N; i++) {
-		if (sieve[i] != 0) {
-			newSieve.push_back(sieve[i]);
-		}
-	}
-
-	vector<int> newNewSieve;
-	int L = 1;
-	for (int i = 0; i < newSieve.size(); i++) {
-		for (int x = 0; x < newSieve.size(); x++) {
-			if (L == newSieve[x]) {
-				newNewSieve.push_back(newSieve[i]);
-				break;
+	while (c_2 <= k) {
+		if (isSimple(i)) {
+			c++; // Amount of simple nums from 2 to K
+			if (isSimple(c) && c >= 2) {
+				c_2++; // Amount of simple positions nums of nums from 2 to K
+				if (c_2 == k) {
+					cout << i;
+					return 0;
+				}
 			}
 		}
-		L++;
+		i++;
 	}
 
-	for (int i = 0; i < newNewSieve.size(); i++) {
-		if (i + 1 == k) {
-			cout << newNewSieve[i];
-			break;
-		}
-	}
 
 	return 0;
 }
