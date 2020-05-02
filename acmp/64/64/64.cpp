@@ -1,65 +1,40 @@
-﻿#include <iostream>
+﻿/*
+	Correct
+*/
+
+#include <iostream>
 #include <string>
 
 using namespace std;
 
-int main()
-{
-	int SIZE;
+int main() {
+	int n, pos = 0, max = 0;
 
-	int M;
+	cin >> n;
 
-	cin >> M;
+	int* arr = new int[n];
 
-	int* arr = new int[M];
+	std::string str;
 
-	for (int i = 0; i < M; i++) {
-		int n;
-		cin >> n;
-		arr[i] = n;
+	for (int i = 0; i < n; i++) {
+		cin >> arr[i];
+		if (arr[i] > max) max = arr[i];
 	}
 
-	int maxNum = 0;
-	for (int i = 0; i < M; i++) {
-		if (arr[i] > maxNum) {
-			maxNum = arr[i];
-		}
-	}
+	for (int i = 2; i < max * max; i++) {
+		if (str.length() > max) break;
+		int isSimple = true;
 
-	/*
-	  maxNum - простое число до
-	  которого нужно искать простые числа
-	*/
-
-	int* sieve = new int[maxNum*2 + 1];
-	for (int i = 2; i <= maxNum*2; i++) {
-		sieve[i] = i;
-	}
-	int k = 2;
-	while(k*k < maxNum* 2) {
-		for (int i = 2; i <= maxNum* 2; i++) {
-			if (sieve[i] % k == 0 && sieve[i] >= 2 * k) {
-				sieve[i] = 0;
-			}
-		}
-		for (int i = 2; i <= maxNum* 2; i++) {
-			if (sieve[i] > k) {
-				k = sieve[i];
+		for (int x = 2; x < i; x++) {
+			if (i % x == 0) {
+				isSimple = false;
 				break;
 			}
 		}
+		if (isSimple) str.append(to_string(i));
 	}
 
-	std::string sieveStr;
-	for (int i = 2; i <= maxNum* 2; i++) {
-		if (sieve[i] != 0) {
-			sieveStr.append(to_string(sieve[i]));
-		}
-	}
-
-	for (int i = 0; i < M; i++) {
-		cout << sieveStr[arr[i] - 1];
-	}
+	for (int i = 0; i < n; i++) cout << str[arr[i] - 1];
 
 	return 0;
 }
