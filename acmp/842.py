@@ -1,10 +1,18 @@
-def f(n, d):
-    x = n * 9
-    z = x
-    k = 1
-    while z % d:
-        z = z * 10 + x
-        k += 1
-    return k, z / d
+N = int(input())
 
-print(f(1, 3))
+arr = []
+
+for i in range(9, 1, -1):
+    while(N % i == 0):
+        N /= i
+        arr.append(i)
+
+if(len(arr) > 0):
+    arr.sort()
+    k = ""
+    for i in arr:
+        k += str(i)
+    print(k)
+
+else:
+    print("-1")
