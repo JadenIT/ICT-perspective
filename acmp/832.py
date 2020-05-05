@@ -61,10 +61,13 @@ N = int(input())
 arr = []
 
 for j in range(N):
+    a, b, c = map(int, input().split())
     tmp = []
-    for i in range(3):
-        t = int(input())
-        tmp.append(t)
+
+    tmp.append(a)
+    tmp.append(b)
+    tmp.append(c)
+
     arr.append(tmp)
 
 for k in range(len(arr)):
