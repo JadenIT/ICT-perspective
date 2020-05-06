@@ -10,18 +10,21 @@ int main()
 
 	cin >> a >> b >> n;
 
-	vector<long long> arr_a, arr_b;
+	//for (long long i = a; i <= n; i += a) arr_a.push_back(i);
+	//for (long long i = b; i <= n; i += b) arr_b.push_back(i);
 
-	for (long long i = a; i <= n; i += a) arr_a.push_back(i);
-	for (long long i = b; i <= n; i += b) arr_b.push_back(i);
+	//long long size;
 
-	long long size;
+	//for (long long i = 0; i < arr_a.size(); i++) {
+	//	auto res = find(arr_b.begin(), arr_b.end(), arr_a[i]);
+	//	if (res != arr_b.end()) {
+	//		s++;
+	//	}
+	//}
+	int maxNum = max(a, b);
 
-	for (long long i = 0; i < arr_a.size(); i++) {
-		auto res = find(arr_b.begin(), arr_b.end(), arr_a[i]);
-		if (res != arr_b.end()) {
-			s++;
-		}
+	for (int i = maxNum - 1; i > 1; i--) {
+
 	}
 
 	cout << n - s;
