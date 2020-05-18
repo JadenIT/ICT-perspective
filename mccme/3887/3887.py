@@ -50,67 +50,25 @@ class MyClass:
         # start_k = 1 or start_k = -1
 
     def go_until_we_are_in_scope(self, start_k):
-        # k = start_k
-        # while True:
-        #     prev_length = self.len_to_house(
-        #         self.crdts[1][0], self.crdts[1][1])
-        #     tmp_x = self.crdts[1][0] + k * self.increase_x
-        #     tmp_y = self.crdts[1][1] + k * self.increase_y
-
-        #     new_length = self.len_to_house(tmp_x, tmp_y)
-
-        #     if new_length >= prev_length:
-        #         return 0
-        #     else:
-        #         if self.station_in_scope(tmp_x, tmp_y):
-        #             return [tmp_x, tmp_y]
-        #         else:
-        #             if start_k == 1:
-        #                 k += 1
-        #             elif start_k == -1:
-        #                 k -= 1
         k = start_k
-        delta_x = [self.crdts[0][0] - self.R, self.crdts[0][0] + self.R]
-        delta_y = [self.crdts[0][1] - self.R, self.crdts[0][1] + self.R]
+        while True:
+            prev_length = self.len_to_house(
+                self.crdts[1][0], self.crdts[1][1])
+            tmp_x = self.crdts[1][0] + k * self.increase_x
+            tmp_y = self.crdts[1][1] + k * self.increase_y
 
-        if self.increase_y == 0:
-            for x in range(delta_x[0], delta_x[1] + 1):
-                delta_x_0 = abs(x - crdts[1][0])
-                if delta_x_0 % self.increase_x != 0:
-                    pass
+            new_length = self.len_to_house(tmp_x, tmp_y)
+
+            if new_length >= prev_length:
+                return 0
+            else:
+                if self.station_in_scope(tmp_x, tmp_y):
+                    return [tmp_x, tmp_y]
                 else:
-                    k = (x - crdts[1][0]) / self.increase_x
-                    y = crdts[1][1] + k * self.increase_y
-
-                    # print(x, y)
-
-                    if y % self.increase_y != 0:
-                        pass
-                    else:
-                        if self.station_in_scope(x, y):
-                            print(x, y)
-                            return [x, y]
-
-        else:
-            for y in range(delta_y[0], delta_y[1] + 1):
-                delta_y_0 = abs(y - crdts[1][1])
-                if delta_y_0 % self.increase_y != 0:
-                    pass
-                else:
-                    k = (y - crdts[1][1]) / self.increase_y
-                    x = crdts[1][0] + k * self.increase_x
-
-                    print(x, self.increase_x)
-                    if self.increase_x == 0:
-                        if self.station_in_scope(x, y):
-                            print(x, y)
-                            return [x, y]
-                    else:
-                        if x % self.increase_x == 0:
-                            if self.station_in_scope(x, y):
-                                print(x, y)
-                                return [x, y]
-
+                    if start_k == 1:
+                        k += 1
+                    elif start_k == -1:
+                        k -= 1
         return 0
 
     # start_k = 1 or start_k = -1
@@ -179,27 +137,13 @@ class MyClass:
         self.increase_y /= gcd_tmp
 
 
-# x_0, y_0, R = map(int, input().split())
-# x_1, y_1, x_2, y_2 = map(int, input().split())
-
-# crdts = [
-#     [x_0, y_0],
-#     [x_1, y_1],
-#     [x_2, y_2]
-# ]
-
-R = 2
-
-# crdts = [
-#     [0, 0],
-#     [2, -2],
-#     [3, -4]
-# ]
+x_0, y_0, R = map(int, input().split())
+x_1, y_1, x_2, y_2 = map(int, input().split())
 
 crdts = [
-    [0, 0],
-    [2, -2],
-    [2, -4]
+    [x_0, y_0],
+    [x_1, y_1],
+    [x_2, y_2]
 ]
 
 main_instance = MyClass(crdts, R)
