@@ -11,7 +11,7 @@ int main()
 
 	long long a, b; // начальная угловая скорость от a до b градусов в секунду.
 	long long k; //  угловая скорость движения колеса уменьшается на k градусов в секунду
-	long long biggest_sector = 0;
+	long long biggest_sector = 0; // Наибольший цикл который на котором остановится стрелка
 
 	vector<int> sectors = { }; // числа, записанные в секторах колеса
 	cin >> n;
@@ -24,16 +24,27 @@ int main()
 
 	cin >> a >> b >> k;
 
-	long long max_sector = *max_element(sectors.begin(), sectors.end());
+	long long max_sector = *max_element(sectors.begin(), sectors.end()); // Максимально возможный сектор среди всех секторов
 
 	for (long long i = a; i <= b; i += k) {
 
-		long long current_sector_index_in_array = 0; // sectors[0]
+		long long current_sector_index_in_array = 0; // текущий индекс сектора в массиве sectors[0]
 
+		
+		/*int tmp = i;
+		while (tmp > k) {
+			current_sector_index_in_array++;
+			tmp -= k;
+		}*/
+
+		// Улучшение вышенаписанного цикла
+		current_sector_index_in_array %= n;
 		if (i % k == 0) current_sector_index_in_array -= 1;
 		current_sector_index_in_array += i / k;
 
-		current_sector_index_in_array %= n;
+
+
+		current_sector_index_in_array %= n; 
 
 		// Идем вправо сторону
 		if (sectors[current_sector_index_in_array] > biggest_sector) biggest_sector = sectors[current_sector_index_in_array];
@@ -43,8 +54,9 @@ int main()
 		if (current_sector_index_in_array != 0) going_left_sector = n - current_sector_index_in_array;
 		if (sectors[going_left_sector] > biggest_sector) biggest_sector = sectors[going_left_sector];
 
-
-		if (biggest_sector == max_sector) break;
+		// Если выпал максимально возможный сектор выходим заранее из цикла
+		// Так как это максимально возможный сектор
+		if (biggest_sector == max_sector) break; 
 	}
 
 	cout << biggest_sector;
