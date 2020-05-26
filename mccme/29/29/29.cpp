@@ -16,8 +16,7 @@ int main()
 
 	for (int i = 0; i <= M_MAX; i++) arr[i] = i;
 
-	arr[0] = 0;
-	arr[1] = 0;
+	arr[0] = 0, arr[1] = 1;
 
 	int k = 2;
 	for (int i = 0; i * i <= M_MAX; i++) {
