@@ -30,7 +30,6 @@ int main()
 
 		long long current_sector_index_in_array = 0; // текущий индекс сектора в массиве sectors[0]
 
-		
 		/*int tmp = i;
 		while (tmp > k) {
 			current_sector_index_in_array++;
@@ -41,9 +40,11 @@ int main()
 		current_sector_index_in_array %= n;
 		if (i % k == 0) current_sector_index_in_array -= 1;
 		current_sector_index_in_array += i / k;
+		//
 
-
-
+		// Сокращаем текущий сектор на количество секторов
+		// например если всего 4 секторa, то 8, 12, 16... 
+		// будут являться одним и тем же сектором
 		current_sector_index_in_array %= n; 
 
 		// Идем вправо сторону

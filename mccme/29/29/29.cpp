@@ -3,49 +3,63 @@
 
 using namespace std;
 
-bool isPrime(long long num) {
-
-	if (num == 0 || num == 1) return false;
-
-	bool flag = true;
-	for (int i = 2; i <= num / 2; i++) {
-		if (num % i == 0) {
-			flag = false;
-			break;
-		}
-	}
-	return flag;
-}
-
 bool isNatural(double num) {
 	if (num == int(num)) return true;
 	return false;
 }
 
+const int M_MAX = 100000;
 
 int main()
 {
+	int arr[M_MAX + 1];
+
+	for (int i = 0; i <= M_MAX; i++) arr[i] = i;
+
+	arr[0] = 0;
+	arr[1] = 0;
+
+	int k = 2;
+	for (int i = 0; i * i <= M_MAX; i++) {
+		for (int j = 2; j <= M_MAX; j++) if (arr[j] > k && arr[j] % k == 0) arr[j] = 0;
+		k++;
+	}
 
 	long long N, M, s = 0;
 
 	cin >> N >> M;
 
-	for (long long a = N; a <= M; a++) {
-		for (long long b = N; b <= a; b++) {
+	for (long long f = N; f <= M; f++) {
+		long long p = arr[f];
 
-			if (isNatural(sqrt(a)) && isNatural(sqrt(b))) {
-				double p = sqrt(a) - sqrt(b);
+		if (p == 0) continue; // Если число не простое
 
-				cout << a << " " << b << " " << p << " " << endl;
+		for (long long a = p; a <= M; a++) {
 
-				if (p < N || p > M) continue;
+			long long b = a - 2 * sqrt(a * p) + p;
 
-				if (!isNatural(sqrt(p))) continue;
+			if (b > a || b < N || b > M) continue;
 
-				if (!isPrime(p)) continue;
+			if (a - 2 * sqrt(a * b) + b != p) continue;
+
+			long long a_n = a;
+			long long b_n = b;
+
+			s++;
+
+			while (true) {
+				long long prev_a = a_n;
+
+				a_n = (a_n + p) * 2 - b_n;
+
+				b_n = prev_a;
+
+				if (a_n < N || a_n > M) break;
 
 				s++;
 			}
+			break;
+
 		}
 	}
 
@@ -53,4 +67,3 @@ int main()
 
 	return 0;
 }
-
