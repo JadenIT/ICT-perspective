@@ -16,7 +16,7 @@ int main()
 
 	for (int i = 0; i <= M_MAX; i++) arr[i] = i;
 
-	arr[0] = 0, arr[1] = 1;
+	arr[0] = 0, arr[1] = 0;
 
 	int k = 2;
 	for (int i = 0; i * i <= M_MAX; i++) {
@@ -33,31 +33,27 @@ int main()
 
 		if (p == 0) continue; // Если число не простое
 
-		for (long long a = p; a <= M; a++) {
+		long long a, b;
+		if (N == 0) {
+			b = 0;
+			a = p;
+		}
+		else {
+			b = p;
+			a = 4 * p;
+		}
 
-			long long b = a - 2 * sqrt(a * p) + p;
+		if (a <= M && b <= M) s++;
 
-			if (b > a || b < N || b > M) continue;
+		while (a <= M && b <= M) {
 
-			if (a - 2 * sqrt(a * b) + b != p) continue;
+			long long prev_a = a;
 
-			long long a_n = a;
-			long long b_n = b;
+			a = (a + p) * 2 - b;
 
-			s++;
+			b = prev_a;
 
-			while (true) {
-				long long prev_a = a_n;
-
-				a_n = (a_n + p) * 2 - b_n;
-
-				b_n = prev_a;
-
-				if (a_n < N || a_n > M) break;
-
-				s++;
-			}
-			break;
+			if (a <= M && b <= M)  s++;
 
 		}
 	}
