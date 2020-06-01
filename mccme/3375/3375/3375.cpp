@@ -1,40 +1,36 @@
 ﻿#include <iostream>
-#include <vector>
-
-using namespace std;
 
 int main()
 {
 	int K;
 
-	cin >> K;
+	std::cin >> K;
 
-	vector<int> arr = { };
+	int rests[20];
 
-	for (int i = 0; i < K - 1; i+=1) {
-		int tmp;
-		cin >> tmp;
-		arr.push_back(tmp);
+	int max_couple[2];
+
+	for (int i = 0; i < K - 1; i++) {
+		std::cin >> rests[i];
 	}
 
+	for (int g = rests[K - 2]; ; g += K) {
 
-	for (int g = 1; ; g++) {
-		bool f = true;
+		bool skip = false;
 
-		int i = 0;
+		for (int divisor = K; divisor >= 2; divisor--) {
+			int rest = rests[divisor - 2];
 
-		for (int N = 2; N <= K; N++) {
-			if (g % N != arr[i]) {
-				f = false;
+			if (g % divisor != rest) {
+				skip = true;
 				break;
 			}
-			i++;
 		}
 
-		if (f) {
-			cout << g;
-			return 0;
-		}
+		if (skip) continue;
+
+		std::cout << g;
+		return 0;
 
 	}
 
