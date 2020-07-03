@@ -1,5 +1,6 @@
-#include <iostream>
+﻿#include <iostream>
 #include <string>
+#include <math.h>
 
 using namespace std;
 
@@ -68,13 +69,26 @@ int main() {
 
 	long long decimal = from_binary_to_decimal(binary_str_ones);
 
+	if (decimal == 0) {
+		cout << 0;
+		return 0;
+	}
+
 	while (decimal <= N) {
-		binary_str = decimal_to_binary(decimal);
-		if (string_contains_n_zeros(binary_str, K)) ans++;
+		long long tmp = decimal;
+		long long s = 0;
+		while (tmp > 1) {
+			if (tmp % 2 == 0) s++;
+			tmp /= 2;
+		}
+		if (tmp == 0) s++;
+		if (s == K) ans++;
+
 		decimal++;
 	}
 
 	cout << ans;
+
 
 	return 0;
 }
