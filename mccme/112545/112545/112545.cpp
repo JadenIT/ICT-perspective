@@ -1,5 +1,5 @@
 ﻿#include <iostream>
-#include <fstream>
+#include <math.h>
 
 using namespace std;
 
@@ -15,58 +15,49 @@ bool isPrime(int n)
 	return true;
 }
 
-int dividers(int i)
-{
-	int sc = 0, n;
-	for (int q = 1; q <= i; q++)if (i % q == 0) sc++;
+int max_prime_divider(int divider) {
 
-	return sc;
-}
+	/*if (isPrime(divider)) return divider;*/
 
-int multuplay_of_diveders(int i) {
-
-
-	int sc = 1, n;
-	for (int q = 1; q <= i; q++) {
-		if (i % q == 0) {
-			sc *= q;
+	for (int i = 2; i <= sqrt(divider); i++) {
+		if (divider % i == 0) {
+			return divider / i;
+			/*divider = divider / i;*/
+			/*if (isPrime(divider)) return divider;
+			else return max_prime_divider(divider);*/
 		}
 	}
+}
 
-	return sc;
+int countDivisors(int n)
+{
+	int cnt = 0;
+	for (int i = 1; i <= sqrt(n); i++) {
+		if (n % i == 0) {
+			if (n / i == i)cnt++;
+			else cnt = cnt + 2;
+		}
+	}
+	return cnt;
 }
 
 int main()
 {
-	/*
+
 	int N;
+
 	cin >> N;
-	long long output;
-	if (!isPrime(N)) {
-		if (N == 1) output = 1;
-		else if (N == 4) output = 6;
-		else {
-			for (int m = 12; ; m += 12) {
-				if (dividers(m) == N) {
-					output = m;
-					break;
-				}
-			}
+
+	int maxPrimeDivider = max_prime_divider(N);
+
+	cout << maxPrimeDivider << endl;
+
+	for (int num = pow(2, (maxPrimeDivider - 1)); ; num += pow(2, (maxPrimeDivider - 1))) {
+		if (countDivisors(num) == N) {
+			cout << num;
+			return 0;
 		}
 	}
-	cout << output;
-	*/
-
-	for (int i = 1; i <= 100; i++) {
-		for (int num = 1; num <= 5000; num++) {
-			if (dividers(num) == i && !isPrime(i)) {
-				cout << num << " " << i << endl;
-				break;
-			}
-		}
-	}
-
-
 
 	return 0;
 }
