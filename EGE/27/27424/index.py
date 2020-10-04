@@ -1,6 +1,8 @@
 array = []
 
-for line in open('27-B_demo.txt'):
+f = open('27-B_demo.txt', 'r')
+
+for line in f:
     if len(line.split()) != 1:
         array.append([int(line.split()[0]), int(line.split()[1])])
 
@@ -14,7 +16,10 @@ for i in array:
 # Выбираем нибольший элемент из каждой пары
 sequence = []
 for i in array:
-    sequence.append(i[0]) if i[0] > i[1] else sequence.append(i[1])
+    if i[0] > i[1]:
+        sequence.append(i[0])
+    else:
+        sequence.append(i[1])
 
 # Если сумма элементов кратна трем, то найдем такую пару у которой
 # разность элементов минимальна и не кратная трем и не равна нулю
