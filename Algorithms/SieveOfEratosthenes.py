@@ -1,11 +1,13 @@
-N = 10
+sieve = list(range(0, 10**2 + 1))
 
-sieve = list(range(0, 100000))
+n = sieve[len(sieve) - 1]
 
 for i in range(2, len(sieve)):
-    for j in range(i, len(sieve), +i):
-        sieve[j] = 0 if i != j else sieve[j]
+    if i**2 <= n:
+        for j in range(i**2, len(sieve), +i):
+                sieve[j] = 0 if i != j else sieve[j]
 
 for i in sieve:
     if i != 0 and i >= 2:
         print(i, end=', ')
+        pass
